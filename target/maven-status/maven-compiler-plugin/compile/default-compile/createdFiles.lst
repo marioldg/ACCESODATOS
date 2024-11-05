@@ -1,0 +1,8 @@
+org/example/Main.class
+org/example/controlFicheros/EscrituraFicheros.class
+org/example/controlUsuarios/TipoUsuarios.class
+org/example/clasesBase/Torneo.class
+org/example/clasesBase/Combate.class
+org/example/clasesBase/Entrenador.class
+org/example/clasesBase/Carnet.class
+org/example/controlFicheros/LecturaFicheros.class

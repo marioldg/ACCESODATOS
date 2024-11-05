@@ -1,0 +1,8 @@
+Rodrigo  1  Admin  1
+Pepe  2  Entrenador  2
+mama  PEPE  Entrenador  3
+MAr  huma1313  Entrenador  5
+jfhf  hu  Admin Torneo  2
+ññ  ññ  Admin Torneo  3
+pepeepe  POLLO  Entrenador  7
+meme  meme1  Entrenador  9

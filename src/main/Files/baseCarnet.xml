@@ -1,0 +1,10 @@
+<carnet>
+    <id>replace.idEntrenador</id>
+    <fechaexp>replace.fehaEXP</fechaexp>
+    <entrenador>
+        <nombre>replace.nombre</nombre>
+        <nacionalidad>replace.nacionaldiad</nacionalidad>
+    </entrenador>
+    <hoy>replace.fechaHOY</hoy>
+    <puntos>replace.ptos</puntos>
+    <torneos>
