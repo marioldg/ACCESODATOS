@@ -17,7 +17,6 @@ public class LecturaFicheros {
     private final String rutaCredenciales = "src/main/Files/Credenciales.txt";
     private String rol;
     private Scanner t = new Scanner(System.in);
-    //private Main main = new Main();
     private EscrituraFicheros escrituraFicheros = new EscrituraFicheros();
 
 
@@ -31,7 +30,6 @@ public class LecturaFicheros {
     }
 
 
-
     //Metodo creado para controlar el LogIn de un usuario, asignandole un rol.
 
 
@@ -40,7 +38,6 @@ public class LecturaFicheros {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaCredenciales))) {
             String line;
             while ((line = br.readLine()) != null) {
-                //System.out.println(line);
                 String[] parts = line.split("  "); //divide la linea con comas
                 if (parts[0].equals(username) && parts[1].equals(password)) {
                     //si las credenciales coinciden
@@ -58,9 +55,7 @@ public class LecturaFicheros {
     }
 
 
-
-
-     //Metodo creado para leer cualquier archivo XML, de tal forma que nos da un String con el contenido
+    //Metodo creado para leer cualquier archivo XML, de tal forma que nos da un String con el contenido
 
     public String leerFicheroXML(String rutaPasada) {
         StringBuilder contenido = new StringBuilder();
@@ -80,7 +75,7 @@ public class LecturaFicheros {
     }
 
 
-      //Metodo para leer el XML de paises
+    //Metodo para leer el XML de paises
 
     public boolean leerPaises(String code) {
         try {
@@ -109,7 +104,7 @@ public class LecturaFicheros {
     }
 
 
-     //Metodo creado para ver si el idUsuario que metemos existe o no
+    //Metodo creado para ver si el idUsuario que metemos existe o no
 
 
     public boolean comprobarNuevo(String usuario) {
@@ -129,8 +124,7 @@ public class LecturaFicheros {
     }
 
 
-
-    }
+}
 
 
 

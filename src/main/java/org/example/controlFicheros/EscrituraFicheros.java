@@ -8,13 +8,13 @@ import java.io.IOException;
 public class EscrituraFicheros {
 
 
- //Constructor de la clase para escritura
+    //Constructor de la clase para escritura
 
     public EscrituraFicheros() {
     }
 
     /*
-      Metodo supleorio para poder escribir archivos con formato XML,
+      Metodo para poder escribir archivos con formato XML,
        comprobamos si la ruta que nos pasan esta vacia, de ser asi, ponemos directamente src/main/Files/
      */
 
@@ -23,9 +23,9 @@ public class EscrituraFicheros {
         if (ruta.isEmpty()) {
             ruta = "src/main/Files/";
         }
-        String rutaCompleta = ruta + File.separator + nombre + extension;
+        String rutaCompleta = ruta + "/" + nombre + extension;
         File f = new File(rutaCompleta);
-        // Usar BufferedWriter para escribir el archivo
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(f))) {
             writer.write(contenido);
             System.out.println("Archivo XML creado en: " + rutaCompleta);
@@ -45,13 +45,13 @@ public class EscrituraFicheros {
         try {
             bw = new BufferedWriter(new FileWriter("src/main/Files/Credenciales.txt", true));
             bw.write(linea);
-            bw.newLine(); // Añadir nueva línea
+            bw.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (bw != null) {
                 try {
-                    bw.close(); // Cerrar el BufferedWriter
+                    bw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

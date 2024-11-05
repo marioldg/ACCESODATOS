@@ -7,11 +7,11 @@ public class Torneo {
     private String nombre;
     private char codRegion;
     private float PuntosVictoria;
-    private int puntos = (int)(Math.random() * 51) + 50;  // Los ptos que ganas
+    private int puntos = (int) (Math.random() * 51) + 50;  // Los ptos que ganas
     private String nombreAdmin;
     private String passAdmin;
-    private ArrayList <Entrenador>entrenadores = new ArrayList<>();  //Lo hacemos con arraylist para no tener problema con el numero de entrenadores, ni combates.
-    private ArrayList <Combate>combates = new ArrayList<>();
+    private ArrayList<Entrenador> entrenadores = new ArrayList<>();  //Lo hacemos con arraylist para no tener problema con el numero de entrenadores, ni combates.
+    private ArrayList<Combate> combates = new ArrayList<>();
 
     public Torneo(int id, String nombre, String nombreAdmin, String password, int i) {
     }
@@ -29,21 +29,21 @@ public class Torneo {
         this.combates = combates;
     }
 
-    public Torneo(int id, String nombre, char codRegion, String nombreAdmin,String passAdmin) {
+    public Torneo(int id, String nombre, char codRegion, String nombreAdmin, String passAdmin) {
         super();
         this.id = id;
         this.nombre = nombre;
         this.codRegion = codRegion;
-        this.nombreAdmin=nombreAdmin;
-        this.passAdmin=passAdmin;
+        this.nombreAdmin = nombreAdmin;
+        this.passAdmin = passAdmin;
     }
 
-    public Torneo(int id,String nombre,char codRegion,String nombreAdmin,int puntosVictoria) {
+    public Torneo(int id, String nombre, char codRegion, String nombreAdmin, int puntosVictoria) {
         this.id = id;
         this.nombre = nombre;
-        this.codRegion=codRegion;
-        this.nombreAdmin=nombreAdmin;
-        this.puntos=puntosVictoria;
+        this.codRegion = codRegion;
+        this.nombreAdmin = nombreAdmin;
+        this.puntos = puntosVictoria;
     }
 
     //Getters Setters

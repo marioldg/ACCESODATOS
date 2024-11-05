@@ -20,60 +20,26 @@ public class Main {
     public boolean acceso;
     private ArrayList<Torneo> torneos = new ArrayList<>();
     private ArrayList<Entrenador> entrenadores = new ArrayList<>();
+
     public static void main(String[] args) throws ParseException {
         Main main = new Main();
 
-
-        /*ArrayList<Entrenador> entrenadores = new ArrayList<>();
-        entrenadores.add(new Entrenador(11, "Pablo", "Esp"));
-        entrenadores.add(new Entrenador(12, "Laura", "Arg"));
-        entrenadores.add(new Entrenador(13, "Diego", "Mex"));
-        entrenadores.add(new Entrenador(14, "Sofía", "Col"));
-        ArrayList<Combate> combates = new ArrayList<>();
-        combates.add(new Combate(formato.parse("11-11-1111"), 13));
-        Entrenador Pablo = new Entrenador(11, "Pablo", "esp");
-        Torneo t = new Torneo(12, "Torneo", 'a', entrenadores, combates);
-        ArrayList<Torneo> tp = new ArrayList<>();
-        tp.add(t);
-        Pablo.setTorneosEntrenadores(tp);
-        Pablo.exportarXML("src/main/Files");*/
-
-
-        /*METODO PARA LEER UN .DAT
-        try (DataInputStream dis = new DataInputStream(new FileInputStream("src/main/Files/Torneos.dat"))) {
-            while (dis.available() > 0) {  // Mientras haya datos disponibles
-                int numero = dis.readInt();
-                double decimal = dis.readDouble();
-                String texto = dis.readUTF();
-
-                System.out.println("Número: " + numero);
-                System.out.println("Decimal: " + decimal);
-                System.out.println("Texto: " + texto);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
 
-
-
-
     public Main() {
-        /**
-         * Cuando empezamos saltamos al metodo login, para meter credenciales
-         * Si no son exitosas, nos saltan opciones
+        /*
+          Cuando empezamos saltamos al metodo login, para meter credenciales
+          Si no son exitosas, nos saltan opciones
          */
 
         leerTorneos();
         login();
 
-
-
     }
 
-    /**
-     * En el metodo login, metemos credenciales, y nos asignamos rol
+    /*
+      En el metodo login, metemos credenciales, y nos asignamos rol
      */
 
 
@@ -115,20 +81,18 @@ public class Main {
         }
     }
 
-    /**
-     * Menu generico, que nos permite movernos
-     * entre las diferenctes opciones de los distintos usuarios
-     *
-     * @param rol
-     * @param nombre
+    /*
+      Menu generico, que nos permite movernos
+      entre las diferenctes opciones de los distintos usuarios
      */
+
     public void menu(String rol, String nombre) {
         switch (rol) {
             case "Admin":
                 menuAdmin();
                 break;
             case "Entrenador":
-                menuEntrenador(null); //como no se guarda la info de los entrenadores no se mete la info aun
+                menuEntrenador(new Entrenador()); //Creamos el entrenador vacio a la espera de saber como recorrer los entrenadores
                 break;
             case "Invi":
                 login();
@@ -161,26 +125,25 @@ public class Main {
         }
     }
 
-    /**
-     * Metodo para desplegar por consola el menu de entrenador
+    /*
+        Metodo para desplegar por consola el menu de entrenador
      */
 
     public void menuEntrenador(Entrenador e) {
         System.out.println("Eres el Entrenador las opciones son esas :" +
-                "\n 0- Volver al login"+
+                "\n 0- Volver al login" +
                 "\n 1- Ver Carnet" +
                 "\n 2- Exportar Carnet");
 
-        Entrenador entrenador = new Entrenador();
+
         int opcion = Integer.parseInt(scanner.nextLine());
         switch (opcion) {
 
             case 2:
-                entrenador.exportarXML("src/main/Files/");
+                e.exportarXML("src/main/Files");
                 break;
             case 1:
-
-
+                System.out.println(e.toString());
                 break;
             case 0:
                 login();
@@ -190,8 +153,8 @@ public class Main {
         }
     }
 
-    /**
-     * Metodo para desplegar por consola el menu de invitado
+    /*
+        Metodo para desplegar por consola el menu de invitado
      */
     public void menuInvitado() {
         System.out.println("Eres el Invitado las opciones son esas :" +
@@ -212,11 +175,11 @@ public class Main {
         }
     }
 
-    /**
-     * Metodo para crear nuevo entrenador
-     * Controlamos que el Entrenador no Exista
-     * Si no existe Comprobar que el code de nacioaldiad Existe
-     * Si ambos existen creamos, y metemos en credenciales.txt
+    /*
+      Metodo para crear nuevo entrenador
+      Controlamos que el Entrenador no Exista
+      Si no existe Comprobar que el code de nacioaldiad Existe
+      Si ambos existen creamos, y metemos en credenciales.txt
      */
     public void nuevoEntrenador() {
         System.out.println("Ingrese el nombre del entrenador");
@@ -227,16 +190,16 @@ public class Main {
         int id = Integer.parseInt(scanner.nextLine());
         System.out.println("Introduce el idTorneo del torneo que quiera introducir");
 
-        for(Torneo torneos : torneos){
+        for (Torneo torneos : torneos) {
             System.out.println(torneos.getNombre() + "  " + torneos.getId());
         }
         int idTorneo = Integer.parseInt(scanner.nextLine());
-        boolean torneoCorrecto=false;
+        boolean torneoCorrecto = false;
         Torneo torneoElegido = null;
-        for(Torneo torneos: torneos){
-            if(idTorneo == (torneos.getId())){
-                torneoCorrecto=true;
-                torneoElegido=torneos;
+        for (Torneo torneos : torneos) {
+            if (idTorneo == (torneos.getId())) {
+                torneoCorrecto = true;
+                torneoElegido = torneos;
             }
         }
 
@@ -271,7 +234,7 @@ public class Main {
 
     }
 
-     // Comprobamos que no existen credenciales dentro de credencuales.txt
+    // Comprobamos que no existen credenciales dentro de credencuales.txt
 
 
     public void crearCredenciales(String nombre, int id, String tipo) {
@@ -286,7 +249,7 @@ public class Main {
     }
 
 
-     // Metodo diseñado para crear nuevo torneo
+    // Metodo diseñado para crear nuevo torneo
 
 
     public void nuevoTorneo() {
@@ -306,55 +269,55 @@ public class Main {
             nuevoTorneo();
         }
 
-            System.out.println("Ingrese el nombre del torneo");
-            String nombreTorneo = scanner.nextLine();
-            System.out.println("Ingrese la región del torneo (una letra)");
-            char region = scanner.nextLine().charAt(0); // Leer el primer carácter como región
+        System.out.println("Ingrese el nombre del torneo");
+        String nombreTorneo = scanner.nextLine();
+        System.out.println("Ingrese la región del torneo (una letra)");
+        char region = scanner.nextLine().charAt(0); // Leer el primer carácter como región
 
             /*
             Este metodo al que llamamos, nos da true si el torneo existe, y false si no
             Tenemos que negar el metodo para seguir dentro
              */
-           boolean existeTorneo = false;
-           for(Torneo t : torneos) {
-               if (t.getNombre().equals(nombreTorneo)) {
-                   System.out.println("El torneo ya existe");
-                   existeTorneo = true;
-               }
+        boolean existeTorneo = false;
+        for (Torneo t : torneos) {
+            if (t.getNombre().equals(nombreTorneo)) {
+                System.out.println("El torneo ya existe");
+                existeTorneo = true;
+            }
 
         }
-           if(!existeTorneo) {
-            Torneo torneo1 = new Torneo(torneos.size(), nombreTorneo,region,nombre,pass);
+        if (!existeTorneo) {
+            Torneo torneo1 = new Torneo(torneos.size(), nombreTorneo, region, nombre, pass);
             torneos.add(torneo1);
             System.out.println("El torneo ha sido creado correctamente.");
-            escrituraFicheros.insertarCredenciales(nombre, pass, "Admin Torneo",torneo1.getId());
+            escrituraFicheros.insertarCredenciales(nombre, pass, "Admin Torneo", torneo1.getId());
 
             //Almacena los datos de torneo en el .dat
 
-               try (DataOutputStream dos = new DataOutputStream(new FileOutputStream("src/main/Files/Torneos.dat", true))) {
-                   dos.writeInt(torneo1.getId());
-                   dos.writeUTF(torneo1.getNombre());
-                   dos.writeChar(torneo1.getCodRegion());
-                   dos.writeUTF(nombre);
-                   dos.writeInt(torneo1.getPuntos());
+            try (DataOutputStream dos = new DataOutputStream(new FileOutputStream("src/main/Files/Torneos.dat", true))) {
+                dos.writeInt(torneo1.getId());
+                dos.writeUTF(torneo1.getNombre());
+                dos.writeChar(torneo1.getCodRegion());
+                dos.writeUTF(nombre);
+                dos.writeInt(torneo1.getPuntos());
 
-               } catch (IOException e) {
-                   System.out.println("Error al guardar el torneo en archivo.");
-                   e.printStackTrace();
-               }
-
-
-           }
-        menuAdmin();
+            } catch (IOException e) {
+                System.out.println("Error al guardar el torneo en archivo.");
+                e.printStackTrace();
+            }
 
 
         }
+        menuAdmin();
+
+
+    }
 
     //Esta funcion te lee el .dat
 
     public void leerTorneos() {
         File f = new File("src/main/Files/Torneos.dat");
-        if(f.exists()&&f.length()>0) {
+        if (f.exists() && f.length() > 0) {
             try (DataInputStream dis = new DataInputStream(new FileInputStream(f))) {
                 while (dis.available() > 0) { // Mientras haya datos disponibles en el archivo
                     int id = dis.readInt();                     // Lee el ID del torneo
@@ -378,5 +341,5 @@ public class Main {
 
     }
 
-    }
+}
 

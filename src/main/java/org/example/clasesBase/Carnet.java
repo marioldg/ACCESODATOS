@@ -19,12 +19,13 @@ public class Carnet {
     }
 
     public Carnet() {
-        this.puntos=0;
-        this.numVictorias=0;
+        this.puntos = 0;
+        this.numVictorias = 0;
+        this.fechaExpedicion = LocalDate.now();
     }
 
     public Carnet(int id, int numVictorias, int ptos) {
-        this.idEntrenador=id;
+        this.idEntrenador = id;
         this.fechaExpedicion = LocalDate.now();
         this.puntos = ptos;
         this.numVictorias = numVictorias;
@@ -63,7 +64,6 @@ public class Carnet {
     public void setPuntos(float puntos) {
         this.puntos = puntos;
     }
-
 
 
 }

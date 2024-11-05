@@ -1,3 +1,0 @@
-En la clase de Lectura, el metodo de Leer XML, y el de leer Paises, ambos dos hacen mas menos lo mismo
-    Podemos unificarlos.
-
