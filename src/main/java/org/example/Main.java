@@ -34,7 +34,7 @@ public class Main {
          */
 
         leerTorneos();
-        login();
+        menuInvitado();
 
     }
 
@@ -55,9 +55,10 @@ public class Main {
 
             if (!acceso) {
                 System.out.println("Credenciales incorrectas. \n" +
-                        "Si desea volver a intentarlo pulse 1. \n" +
-                        "Si quieres ser invitado pulse 2.\n" +
-                        "Si desea salir pulse 0.");
+                                "Si desea salir pulse 0.\n" +
+                                "Si desea volver a intentarlo pulse 1. \n" +
+                                "Si quieres ser invitado pulse 2.");
+
                 int cod = controlarExceptionInt();
 
                 switch (cod) {
@@ -108,15 +109,16 @@ public class Main {
 
     public void menuAdmin() {
         System.out.println("Eres el Admin las opciones son esas :" +
-                "\n 1- Nuevo Torneo" +
-                "\n 0-Salir");
+                "\n 0-Salir"+
+                "\n 1- Nuevo Torneo");
         int opcion = controlarExceptionInt();
         switch (opcion) {
+            case 0:
+                menuInvitado();
+                break;
+
             case 1:
                 nuevoTorneo();
-                break;
-            case 0:
-                login();
                 break;
 
             default:
@@ -150,7 +152,7 @@ public class Main {
 
 
             } else if (opcion == 0) {
-                login();
+                menuInvitado();
                 return;
             } else {
                 System.out.println("Opcion no valida.Saliendo del programa...");
@@ -165,11 +167,14 @@ public class Main {
      */
     public void menuInvitado() {
         System.out.println("Eres el Invitado las opciones son esas :" +
+                "\n 0-Salir"+
                 "\n 1-Nuevo entrenador " +
-                "\n 2-Logear" +
-                "\n 3-Salir");
+                "\n 2-Logear" );
         int opcion = controlarExceptionInt();
         switch (opcion) {
+            case 0:
+                System.out.println("Saliendo del programa...");
+                return;
             case 1:
                 nuevoEntrenador();
                 break;
@@ -189,13 +194,17 @@ public class Main {
       Si ambos existen creamos, y metemos en credenciales.txt
      */
     public void nuevoEntrenador() {
+        if(torneos.size()==0){
+            System.out.println("No hay torneos a los que inscribirse aun.\nSaliendo...");
+            menuInvitado();
+
+        }else{
+
         System.out.println("Ingrese el nombre del entrenador");
         String nombre = scanner.nextLine();
         System.out.println("Ingrese la nacionalidad del entrenador");
         String nacionalidad = scanner.nextLine();
-        System.out.println("Ingrese el id del entrenador");
-        int id = controlarExceptionInt();
-        System.out.println("Introduce el idTorneo del torneo que quiera introducir");
+        System.out.println("Introduce el id del torneo al que se quiera introducir");
 
         for (Torneo torneos : torneos) {
             System.out.println(torneos.getNombre() + "  " + torneos.getId());
@@ -216,30 +225,23 @@ public class Main {
          */
         if (lecturaFicheros.leerPaises(nacionalidad) && torneoCorrecto) {
 
-            Entrenador nuevoEntrenador = new Entrenador(id, nombre, nacionalidad);
+            Entrenador nuevoEntrenador = new Entrenador(generarIdEntrenador(), nombre, nacionalidad);
 
 
 
             nuevoEntrenador.getTorneosEntrenadores().add(torneoElegido);          //me añade al array de los torneos que participa el torneo que escoge el nuevo entrenador
             entrenadores.add(nuevoEntrenador);                                   //añade el nuevo entrenador al array de entrenadores del main
             torneos.get(idTorneo).getEntrenadores().add(nuevoEntrenador);       //añade el nuevo entrenador al array de de entrenadores del torneo escogido
-            crearCredenciales(nombre, id, "Entrenador");
+            crearCredenciales(nombre, generarIdEntrenador(), "Entrenador");
             menuEntrenador(nuevoEntrenador);
         } else {
-            System.out.println("Error:el code del pais, o el torneo, no esta, no se crea");
+            System.out.println("Error:el code del pais, o el torneo, no esta\nNo se ha creado");
+            menuInvitado();
+        }
         }
 
-
     }
 
-        /*
-        Metodo creado para incuir un ADMIN TORNEO,
-        en la lista de credenciales del txt
-        */
-
-    public void nuevoAdminTorneo() {
-
-    }
 
     // Comprobamos que no existen credenciales dentro de credencuales.txt
 
@@ -247,6 +249,7 @@ public class Main {
     public void crearCredenciales(String nombre, int id, String tipo) {
         if (lecturaFicheros.comprobarNuevo(nombre)) {
             System.out.println("Usuario repetido");
+            nuevoEntrenador();
 
         } else {
             System.out.println("Inserte contraseña");
@@ -348,6 +351,9 @@ public class Main {
 
     }
 
+    /*Con este metodo controlamos que cuando pides un int por pantalla
+     no rompa el programa por no ser int*/
+
     public static int controlarExceptionInt() {
         Scanner scanner = new Scanner(System.in);
         int numero = 0;
@@ -365,6 +371,27 @@ public class Main {
             }
         }
         return numero;
+    }
+
+    //Este metodo lee el txt y suma 1 al id de crear nuevoEntrenador
+
+    public static int generarIdEntrenador(){
+        int contadorId=0;
+        try(BufferedReader br = new BufferedReader(new FileReader("src/main/Files/Credenciales.txt"))) {
+            String linea;
+            while((linea=br.readLine())!=null){
+                String[] parts = linea.split("  ");
+                if(parts[2].equals("Entrenador")){
+                    contadorId++;
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Archivo no encontrado");
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo");
+        }
+        return contadorId;
     }
 
 }

@@ -39,12 +39,13 @@ public class LecturaFicheros {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("  "); //divide la linea con comas
-                if (parts[0].equals(username) && parts[1].equals(password)) {
-                    //si las credenciales coinciden
-                    rol = parts[2];
-                    System.out.println("Login exitoso. \n Bienvenido " + username + ". Rol: " + parts[2]);
-                    sol = true;
-                }
+                    if (parts[0].equalsIgnoreCase(username) && parts[1].equals(password)) {
+                        //si las credenciales coinciden
+                        rol = parts[2];
+                        System.out.println("Login exitoso. \n Bienvenido " + username + ". Rol: " + parts[2]);
+                        sol = true;
+                    }
+
             }
 
 

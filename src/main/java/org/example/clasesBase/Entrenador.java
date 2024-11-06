@@ -145,7 +145,7 @@ public class Entrenador {
         baseXML += "\n</torneos>";
         baseXML += "\n</carnet>";
 
-        System.out.println(baseXML);
+        //System.out.println(baseXML);
         EscrituraFicheros out = new EscrituraFicheros();
         out.escribirXML(".xml", getNombre(), ruta, baseXML);
     }
