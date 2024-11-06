@@ -58,7 +58,7 @@ public class Main {
                         "Si desea volver a intentarlo pulse 1. \n" +
                         "Si quieres ser invitado pulse 2.\n" +
                         "Si desea salir pulse 0.");
-                int cod = Integer.parseInt(scanner.nextLine());
+                int cod = controlarExceptionInt();
 
                 switch (cod) {
                     case 0:
@@ -110,7 +110,7 @@ public class Main {
         System.out.println("Eres el Admin las opciones son esas :" +
                 "\n 1- Nuevo Torneo" +
                 "\n 0-Salir");
-        int opcion = Integer.parseInt(scanner.nextLine());
+        int opcion = controlarExceptionInt();
         switch (opcion) {
             case 1:
                 nuevoTorneo();
@@ -138,7 +138,7 @@ public class Main {
                     "\n 2- Exportar Carnet");
 
 
-            int opcion = Integer.parseInt(scanner.nextLine());
+            int opcion = controlarExceptionInt();
 
 
             if (opcion == 1) {
@@ -168,7 +168,7 @@ public class Main {
                 "\n 1-Nuevo entrenador " +
                 "\n 2-Logear" +
                 "\n 3-Salir");
-        int opcion = Integer.parseInt(scanner.nextLine());
+        int opcion = controlarExceptionInt();
         switch (opcion) {
             case 1:
                 nuevoEntrenador();
@@ -194,13 +194,13 @@ public class Main {
         System.out.println("Ingrese la nacionalidad del entrenador");
         String nacionalidad = scanner.nextLine();
         System.out.println("Ingrese el id del entrenador");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = controlarExceptionInt();
         System.out.println("Introduce el idTorneo del torneo que quiera introducir");
 
         for (Torneo torneos : torneos) {
             System.out.println(torneos.getNombre() + "  " + torneos.getId());
         }
-        int idTorneo = Integer.parseInt(scanner.nextLine());
+        int idTorneo =controlarExceptionInt();
         boolean torneoCorrecto = false;
         Torneo torneoElegido = null;
         for (Torneo torneos : torneos) {
@@ -346,6 +346,25 @@ public class Main {
 
         }
 
+    }
+
+    public static int controlarExceptionInt() {
+        Scanner scanner = new Scanner(System.in);
+        int numero = 0;
+        boolean valido = false;
+
+        // Repetir hasta que se ingrese un valor válido
+        while (!valido) {
+            System.out.print("Por favor, ingresa un número entero: ");
+            try {
+                // Intentamos parsear el valor ingresado como un entero
+                numero = Integer.parseInt(scanner.nextLine());
+                valido = true;  // Si no hay error, la entrada es válida
+            } catch (NumberFormatException e) {
+                System.out.println("¡Error! Debes ingresar un número entero.");
+            }
+        }
+        return numero;
     }
 
 }
