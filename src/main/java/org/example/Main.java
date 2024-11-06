@@ -102,8 +102,8 @@ public class Main {
         }
     }
 
-    /**
-     * Metodo para desplegar por consola el menu de admin ( no admin torneo)
+    /*
+      Metodo para desplegar por consola el menu de admin ( no admin torneo)
      */
 
     public void menuAdmin() {
@@ -130,26 +130,33 @@ public class Main {
      */
 
     public void menuEntrenador(Entrenador e) {
-        System.out.println("Eres el Entrenador las opciones son esas :" +
-                "\n 0- Volver al login" +
-                "\n 1- Ver Carnet" +
-                "\n 2- Exportar Carnet");
+
+        while (true) {
+            System.out.println("Eres el Entrenador las opciones son esas :" +
+                    "\n 0- Volver al login" +
+                    "\n 1- Ver Carnet" +
+                    "\n 2- Exportar Carnet");
 
 
-        int opcion = Integer.parseInt(scanner.nextLine());
-        switch (opcion) {
+            int opcion = Integer.parseInt(scanner.nextLine());
 
-            case 2:
-                e.exportarXML("src/main/Files");
-                break;
-            case 1:
+
+            if (opcion == 1) {
                 System.out.println(e.toString());
-                break;
-            case 0:
+
+
+            } else if (opcion == 2) {
+                e.exportarXML("src/main/Files");
+
+
+            } else if (opcion == 0) {
                 login();
+                return;
+            } else {
+                System.out.println("Opcion no valida.Saliendo del programa...");
                 break;
-            default:
-                break;
+            }
+
         }
     }
 
@@ -211,7 +218,7 @@ public class Main {
 
             Entrenador nuevoEntrenador = new Entrenador(id, nombre, nacionalidad);
 
-            System.out.println("El torneo si existe");
+
 
             nuevoEntrenador.getTorneosEntrenadores().add(torneoElegido);          //me añade al array de los torneos que participa el torneo que escoge el nuevo entrenador
             entrenadores.add(nuevoEntrenador);                                   //añade el nuevo entrenador al array de entrenadores del main
@@ -254,14 +261,14 @@ public class Main {
 
     public void nuevoTorneo() {
 
-        System.out.println("Comenzamos la creacion del nuevo admin");
+
         String pass = null;
         System.out.println("Introduce el nombre del Admin del Torneo");
         String nombre = scanner.nextLine();
 
+        //comprobamos que el usuario no existe
         if (!lecturaFicheros.comprobarNuevo(nombre)) {
-            System.out.println("El usuario no existe");
-            System.out.println("Introduce pass");
+            System.out.println("Introduce una contraseña");
             pass = scanner.nextLine();
 
         } else {
@@ -280,7 +287,7 @@ public class Main {
              */
         boolean existeTorneo = false;
         for (Torneo t : torneos) {
-            if (t.getNombre().equals(nombreTorneo)) {
+            if (t.getNombre().equals(nombreTorneo) && region==t.getCodRegion()) {
                 System.out.println("El torneo ya existe");
                 existeTorneo = true;
             }

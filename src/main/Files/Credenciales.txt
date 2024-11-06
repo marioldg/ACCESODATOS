@@ -1,4 +1,2 @@
 Rodrigo  1  Admin  1
-Mario  2  Admin Torneo  0
-Pepin  3  Admin Torneo  1
-Dado  4  Entrenador  4
+
